@@ -28,7 +28,10 @@ param(
   [string]$Note,
   [ValidateSet('flagged', 'waiting', 'normal')][string]$State,
   [switch]$Flag,
-  [switch]$Waiting
+  [switch]$Waiting,
+  # Emit objects instead of the coloured human view, so callers (the hook,
+  # /session-end, burn.ps1) can pipe and filter rather than scrape.
+  [switch]$Json
 )
 
 $ErrorActionPreference = 'Stop'
@@ -51,12 +54,48 @@ function Get-Headers {
     Authorization          = "Bearer $(Get-Token)"
     Accept                 = 'application/vnd.github+json'
     'X-GitHub-Api-Version' = '2022-11-28'
+    'Cache-Control'        = 'no-cache'
   }
 }
 
+$script:MarkerFile = Join-Path $env:USERPROFILE '.claude\todo-lastwrite.json'
+
+function Set-LastWrite {
+  param([string]$Sha)
+  @{ sha = $Sha; at = (Get-Date).ToUniversalTime().ToString('o') } |
+    ConvertTo-Json | Set-Content -Path $script:MarkerFile -Encoding utf8
+}
+
+function Get-LastWrite {
+  if (-not (Test-Path $script:MarkerFile)) { return $null }
+  try { Get-Content $script:MarkerFile -Raw | ConvertFrom-Json } catch { $null }
+}
+
 function Get-Board {
-  $uri = "https://api.github.com/repos/$($script:Owner)/$($script:Repo)/contents/$($script:Path)"
-  $res = Invoke-RestMethod -Uri $uri -Headers (Get-Headers)
+  # GitHub's contents API can serve the pre-write copy for a second or two after
+  # a write. Writes are safe regardless (a stale read carries a stale sha, so the
+  # conditional PUT is rejected), but a `list` that shows a task you just
+  # finished is not trustworthy. So: only when we wrote very recently, wait for
+  # the server to catch up to our own sha. A write from the phone changes the
+  # sha legitimately, hence the short window rather than a blanket retry.
+  $marker = Get-LastWrite
+  $deadline = $null
+  if ($marker -and $marker.sha) {
+    $age = (Get-Date).ToUniversalTime() - ([datetime]$marker.at).ToUniversalTime()
+    if ($age.TotalSeconds -lt 15) { $deadline = (Get-Date).AddSeconds(8) }
+  }
+
+  $bust = [Guid]::NewGuid().ToString('N')
+  $uri = "https://api.github.com/repos/$($script:Owner)/$($script:Repo)/contents/$($script:Path)?nocache=$bust"
+
+  while ($true) {
+    $res = Invoke-RestMethod -Uri $uri -Headers (Get-Headers)
+    if (-not $deadline -or $res.sha -eq $marker.sha -or (Get-Date) -gt $deadline) { break }
+    Start-Sleep -Milliseconds 400
+    $bust = [Guid]::NewGuid().ToString('N')
+    $uri = "https://api.github.com/repos/$($script:Owner)/$($script:Repo)/contents/$($script:Path)?nocache=$bust"
+  }
+
   $json = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($res.content))
   [pscustomobject]@{
     State = $json | ConvertFrom-Json
@@ -129,7 +168,8 @@ function Save-Board {
     sha     = $Sha
   } | ConvertTo-Json
   $uri = "https://api.github.com/repos/$($script:Owner)/$($script:Repo)/contents/$($script:Path)"
-  Invoke-RestMethod -Uri $uri -Method Put -Headers (Get-Headers) -Body $body -ContentType 'application/json' | Out-Null
+  $res = Invoke-RestMethod -Uri $uri -Method Put -Headers (Get-Headers) -Body $body -ContentType 'application/json'
+  Set-LastWrite -Sha $res.content.sha
 }
 
 # Applies $Mutate to the board and writes it back; on a conflicting write the
@@ -192,7 +232,14 @@ switch ($Command) {
 
   'list' {
     $board = Get-Board
-    Show-Board -State $board.State -FilterTopic $Topic -FilterState $State
+    if ($Json) {
+      @($board.State.tasks | Where-Object {
+          (-not $Topic -or $_.topic -eq $Topic) -and (-not $State -or $_.state -eq $State)
+        })
+    }
+    else {
+      Show-Board -State $board.State -FilterTopic $Topic -FilterState $State
+    }
   }
 
   'topics' {
