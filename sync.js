@@ -19,7 +19,10 @@ export class Sync extends EventTarget {
     this.now = now;
     this.state = emptyState();
     this.pending = this._readQueue();
-    this.status = 'idle';
+    // Starts as 'loading', not 'idle': an empty list that has not been fetched
+    // yet must be distinguishable from an empty list that has.
+    this.status = 'loading';
+    this.loaded = false;
     this.lastError = null;
     this._timer = null;
     this._flushing = false;
@@ -38,6 +41,7 @@ export class Sync extends EventTarget {
       const remote = await this.store.load();
       // Anything queued while we were away still wins locally until it lands.
       this.state = applyAll(remote, this.pending);
+      this.loaded = true;
       this._setStatus('idle');
       this._mirror();
       this._emit();

@@ -66,6 +66,7 @@ body {
 .bar-right { display: flex; align-items: center; gap: 6px; }
 
 .status { font-size: 12px; color: var(--muted); min-width: 8px; }
+.status[data-status="loading"]::before { content: "loading…"; }
 .status[data-status="saving"]::before { content: "saving…"; }
 .status[data-status="offline"]::before { content: "offline"; color: var(--wait); }
 .status[data-status="error"]::before { content: "error"; color: var(--flag); }
