@@ -3,6 +3,8 @@ the app. Each JS check is reported individually."""
 
 from pathlib import Path
 
+import pytest
+
 from conftest import report
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -23,12 +25,19 @@ def test_store(page, server):
     report(_run(page, server, "runStore"))
 
 
-def test_powershell_and_app_serialize_identically(page, server):
-    """A real file written by tools/todo.ps1 must round-trip through the app
-    byte for byte. If it doesn't, every alternating write rewrites the whole
+@pytest.mark.parametrize(
+    "fixture",
+    [
+        "ps-written.json",   # written by tools/todo.ps1
+        "live-board.json",   # written by tools/migrate_board.py, fetched back from GitHub
+    ],
+)
+def test_every_writer_serializes_identically(page, server, fixture):
+    """Real files written by the other two writers must round-trip through the
+    app byte for byte. If they don't, every alternating write rewrites the whole
     file and the git history stops being a usable record of what changed."""
     page.goto(f"{server}/index.html")
-    text = (FIXTURES / "ps-written.json").read_text(encoding="utf-8")
+    text = (FIXTURES / fixture).read_text(encoding="utf-8")
     mismatch = page.evaluate(
         """async (text) => {
             const m = await import('/logic.js');

@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "inbox",
+      "title": "Inbox"
+    },
+    {
+      "id": "personal",
+      "title": "Personal"
+    },
+    {
+      "id": "lab",
+      "title": "Lab"
+    },
+    {
+      "id": "degree",
+      "title": "Degree"
+    },
+    {
+      "id": "entrepreneurship",
+      "title": "Entrepreneurship"
+    },
+    {
+      "id": "ai-native",
+      "title": "AI Native"
+    },
+    {
+      "id": "explore",
+      "title": "Explore"
+    },
+    {
+      "id": "relationships",
+      "title": "Relationships"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t_mig0000",
+      "text": "Review the EE degree GOAL.md draft",
+      "topic": "degree",
+      "state": "normal",
+      "note": "check the empower-over-replace framing for coursework and the \"outside the broader AI program\" framing in the last section; after approval the agent commits + pushes (added 2026-05-25)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0001",
+      "text": "Pick the second specialisation pillar: Control vs EM/RF",
+      "topic": "degree",
+      "state": "normal",
+      "note": "the 2026-06-05 decision session converged on SP locked as the signal anchor; the open choice is the second pillar: **Control** (Candidate A \"SP+Control\" — broadest, control deep, RF only sampled) vs **EM/RF** (Candidate B \"SP+EM\" — two genuinely deep pillars, narrower), with **Computers A** floated as a third option for slot two. Also weigh in on chip design — your closing question (none of the candidates cover it) was left unanswered when the session cut off, and covering it would cost breadth elsewhere. Pick a candidate or request tweaks so the curriculum + track-decision docs can be written (added 2026-06-05)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0002",
+      "text": "Review + commit the Session 8 lab prep (needs C measured at the bench)",
+      "topic": "degree",
+      "state": "normal",
+      "note": "all four prep artifacts (theory `רקע עיוני 8.md`, `preparation_report.md`, results worksheet `lab_results.md`/`.xlsx`, quiz prep `הכנה לבוחן 8.md`) were built from the staged 2025 source PDFs on 06-09 and passed a 4-agent adversarial re-derivation (all PASS, fixes applied), but were deliberately left UNCOMMITTED awaiting your review. One unavoidable gap: prep-report Q1.6 (capacitive filter) needs the lab board's (מדגם) capacitor value C measured at the bench — it's in no provided PDF — before its three numeric answers finalize. Review and commit; close Q1.6 after measuring C in the lab (added 2026-06-12)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0003",
+      "text": "Decide the Session 5 formula sheet + triage the uncommitted tree",
+      "topic": "degree",
+      "state": "normal",
+      "note": "`דף נוסחאות 5.md` and its PDF are still uncommitted, and the agent offered but did not apply an `ω_c = 1/τ` addition: say whether to commit the formula sheet and whether to include that addition. Separately, a pile of unrelated cross-course changes (Semiconductors, Linear Systems, etc.) is sitting uncommitted in the working tree — triage what to keep/commit (added 2026-06-12)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0004",
+      "text": "Triage the two new מל\"מ equation-sheet PDFs",
+      "topic": "degree",
+      "state": "normal",
+      "note": "`Malam Equation Sheet last update 27-06-2024.pdf` and `דף עזר מלמ מעודכן 1.7.26.pdf` sit uncommitted in the Semiconductors course root (not under `archive/`). Decide whether these updated sheets replace/supplement the existing Semiconductors formula source, then move them into `archive/` (and optionally process to an `ai_data` twin). Left out of this session's commits deliberately (added 2026-07-06)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0005",
+      "text": "Run /news and read the digest",
+      "topic": "explore",
+      "state": "normal",
+      "note": "📰 **Daily — run `/news` and read the digest** (standing recurring reminder, not a one-off blocker; added 2026-06-16)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0006",
+      "text": "Review + commit the /news skill",
+      "topic": "explore",
+      "state": "normal",
+      "note": "built this session (uncommitted in Research: `news/` config + digests folder, `.claude/skills/news/SKILL.md`, and a `CLAUDE.md` edit registering it). Tune `news/interests.md` to your real beats, then approve a commit (added 2026-06-17)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0007",
+      "text": "Pick which mechanism-sourcing candidates to promote",
+      "topic": "explore",
+      "state": "normal",
+      "note": "pick which of the 7 to promote to Pass. Highest-leverage backlog item; resolves the 78% agent-added-mechanisms problem in health-longevity (added 2026-05-26)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0008",
+      "text": "Review or reject the auto/burn-2026-06-11 branch (5 commits)",
+      "topic": "explore",
+      "state": "normal",
+      "note": "holds 5 unmerged local burn commits, each shipping one agent-improvements backlog item: source-scout HTTP-failure fallback policy, coverage-vs-source_target gather stop condition, synthesizer Ready-for-product review gate, gather RQ pre-flight (refuses placeholder topic.md), and a new `/research-mechanisms` skill closing the added-by-agent mechanism loop. Supersedes `auto/burn-2026-06-06` (its 2 commits were re-shipped from current main on the new branch — that branch can be deleted after review). Review and merge to main or reject (added 2026-06-06, updated 2026-06-11)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0009",
+      "text": "health-longevity: approve folding the sleep subtopic in",
+      "topic": "explore",
+      "state": "normal",
+      "note": "the librarian proposed integrating the `sleep` subtopic into the parent; review and run `/research-integrate health-longevity --apply` if acceptable (added 2026-05-26)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0010",
+      "text": "methodical-innovation: fill in topic.md (blocks gathering)",
+      "topic": "explore",
+      "state": "normal",
+      "note": "Goal, Follow-up goal, Research questions, Scope in/out, Intended products. Currently on template placeholders, blocking the gather phase (added 2026-05-26)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0011",
+      "text": "Pick the trust-tier weighting framing for synthesis",
+      "topic": "explore",
+      "state": "normal",
+      "note": "(A) every Layer-1 idea cites ≥1 strong-trust fact, (B) Layer-1 must rest on ≥X% strong-trust facts, (C) no-strong-evidence ideas demote to Layer-2 or delete (added 2026-05-26)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0012",
+      "text": "Confirm the gather stop-condition policy",
+      "topic": "explore",
+      "state": "normal",
+      "note": "is `/research-gather` allowed to stop when RQ coverage is complete even if `source_target` hasn't been hit? Observed in health-longevity gather-2 (11/12), currently outside the written spec (added 2026-05-26)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0013",
+      "text": "Decide the backlog path convention (flat vs folder)",
+      "topic": "explore",
+      "state": "normal",
+      "note": "keep flat `<slug>.md` files (current) or switch to folder-per-improvement. Reversible later but cheaper now while only 5 stubs exist (added 2026-05-26)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0014",
+      "text": "Approve or reject the DIVERGE inversion+baseline lesson",
+      "topic": "explore",
+      "state": "normal",
+      "note": "*\"include at least one inversion candidate and at least one minimum-viable-baseline candidate, even if both are expected to lose.\"* Surfaced 2026-05-13, still flagged-but-unpromoted (added 2026-05-26)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0015",
+      "text": "Approve or reject the secondary-lane fallback lesson",
+      "topic": "explore",
+      "state": "normal",
+      "note": "*\"DIVERGE on the secondary lane is a legitimate fallback when the primary lane is fully blocked-on-user; the secondary lane should not be auto-suppressed by 'lower priority'.\"* Surfaced by the 2026-06-06 DIVERGE pass in Research's WORK_LOG and flagged for promotion to its Lessons section, where it's still waiting; without approval it risks being compressed away by a future DIGEST (added 2026-06-11)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0016",
+      "text": "Onboard the professor on the starter + lock the feedback channel",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "update 0006 shipped + pushed (starter v0.6.0: onboarding now opens as an invitation; `FRICTION/` capture is bidirectional — what held as well as what chafed). Prep lists exist (his machine: VS Code + Claude Code signed-in + git; first session: clone `gur-git/ai-native-research-starter` → say \"start\" → a first learn→gate loop). Blocked-on-you: run that first session with him, then **agree the periodic-feedback cadence and get read access to his starter copy** so you can pull his `FRICTION/` without bothering him — that read access is what makes the upstream loop actually function (added 2026-06-27)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0017",
+      "text": "Flip the Template repository toggle on the starter repo",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "the starter is built and pushed (`https://github.com/gur-git/ai-native-research-starter`), but the GitHub Settings → General \"Template repository\" switch is still off. It's the last flip and only you (repo owner) can do it; until then users' agents can't clone the starter as a template (added 2026-06-11)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0018",
+      "text": "Pilot the research methodology on the SNN work + friction log",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "the repo is built and pushed (README → HANDOFF.md → agent operating guide, all reconciled onto the 0–7 phase scheme) and is deliberately paused at this handoff. You said you'd \"try it and come back with feedback.\" The next input the methodology needs is your real-world use as \"researcher me\": hand `HANDOFF.md` to a fresh agent to scaffold the SNN pilot repo, work in it, and report what helped vs. got in the way so the methodology can be revised against what actually works (added 2026-06-10)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0019",
+      "text": "Get professor consent before publicising the research repo",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "the lab-survey interview in the repo is unnamed but linkable through the pilot, so publicizing the repo more broadly should wait until the professor has signed off. Gate on you before any wider sharing (added 2026-06-11)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0020",
+      "text": "Set up durable read access to the lab AI-usage survey responses",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "the Google Form keeps collecting answers, but the Responses sheet sits on a Google account the Drive integration can't reach, so every documentation update needs you to paste or relink the data by hand. Share the Responses sheet to the integration-reachable account (or settle on another durable hand-off) so the survey section can stay in sync as new responses arrive without a manual export each time (added 2026-06-10)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0021",
+      "text": "Decide whether to fold the first-encounter bet into Q14.1",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "update 0006 revised G22 (onboarding opens as an invitation) and the 2026-06-27 log offered to extend Q14.1 (the onboarding-interface bet) to name it, but left Q14.1's text unedited pending your call (added 2026-06-27)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0022",
+      "text": "Review or reject auto/burn-2026-07-16 (research repo)",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "one small burn commit (9532e48): fixes two dead links in the June log entries that still pointed at `methodology/ai-native-research-process.md`, which was consolidated into `METHODOLOGY.md` on 2026-06-10; links now point at `METHODOLOGY.md` with the consolidation noted inline. Merge or reject (added 2026-07-16)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0023",
+      "text": "Review or reject auto/burn-2026-07-16 (decision-making repo)",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "one small burn commit (3a35a6e): reconciles the `decide` skill to `templates/decision-record.md` as the canonical Phase-6 ADR shape (skill's inline form never referenced the template and had drifted), adds the template's \"Goal it serves\" line to the light form, and fixes the skill's ad-hoc `[primary-verified]` evidence tag to the repo-wide `[lived]/[science]/[proposed]` set. Merge or reject. (Also: a stale `.git/index.lock` from Jun 9 was found and removed — some git process crashed there back then.) (added 2026-07-16)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0024",
+      "text": "Decide the next SNN learning entry point: U3 vs the T-section sprint",
+      "topic": "lab",
+      "state": "normal",
+      "note": "U1 closed by quiz 2026-06-17 (Gur's track, 3/31). `state.md` records both as live options and deliberately does not pick; Gur's navigation call gates the next learning session (added 2026-06-20)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0025",
+      "text": "Decide whether to PR gur-learning to main (~31 MB of MP3s)",
+      "topic": "lab",
+      "state": "normal",
+      "note": "branch is pushed (incl. the new T1–T8 audio podcast under `presentations/audio/`). Heads-up: merging carries ~31 MB of committed MP3s into `main` — a deliberate exception to the repo's no-audio rule — so weigh PR-now vs keep it on the branch for the colleague to download (added 2026-06-20)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0026",
+      "text": "Resolve the modem repo's uncommitted state",
+      "topic": "lab",
+      "state": "normal",
+      "note": "branch `demo-system` has `README.md` and `.gitignore` staged as deleted; commit them or restore (added 2026-05-25)",
+      "created": "2026-07-31T17:18:16.000Z"
+    },
+    {
+      "id": "t_mig0027",
+      "text": "Decide whether to git init model-arena + review about-me.md",
+      "topic": "ai-native",
+      "state": "normal",
+      "note": "new repo scaffolded this session (GOAL/CLAUDE/README/RUBRIC, 3 test briefs, the `/bench` skill, `about-me.md`); it is NOT a git repo yet. Decide whether to `git init` + commit, and correct `about-me.md` — it was seeded from workspace context and is the input to the make-something-useful test (added 2026-06-17)",
+      "created": "2026-07-31T17:18:16.000Z"
+    }
+  ]
+}
