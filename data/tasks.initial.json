@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "topics": [
+    { "id": "inbox", "title": "Inbox" },
+    { "id": "personal", "title": "Personal" },
+    { "id": "lab", "title": "Lab" },
+    { "id": "degree", "title": "Degree" },
+    { "id": "entrepreneurship", "title": "Entrepreneurship" },
+    { "id": "ai-native", "title": "AI Native" },
+    { "id": "explore", "title": "Explore" },
+    { "id": "relationships", "title": "Relationships" }
+  ],
+  "tasks": []
+}

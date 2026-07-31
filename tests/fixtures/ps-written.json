@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "inbox",
+      "title": "Inbox"
+    },
+    {
+      "id": "personal",
+      "title": "Personal"
+    },
+    {
+      "id": "lab",
+      "title": "Lab"
+    },
+    {
+      "id": "degree",
+      "title": "Degree"
+    },
+    {
+      "id": "entrepreneurship",
+      "title": "Entrepreneurship"
+    },
+    {
+      "id": "ai-native",
+      "title": "AI Native"
+    },
+    {
+      "id": "explore",
+      "title": "Explore"
+    },
+    {
+      "id": "relationships",
+      "title": "Relationships"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t_5p22pcxr7u",
+      "text": "בדיקת עברית בקובץ",
+      "topic": "personal",
+      "state": "normal",
+      "note": "",
+      "created": "2026-07-31T17:12:43.391Z"
+    },
+    {
+      "id": "t_fwja82kto8",
+      "text": "verify the todo pipeline end to end",
+      "topic": "ai-native",
+      "state": "flagged",
+      "note": "written by the PowerShell path",
+      "created": "2026-07-31T17:12:42.026Z"
+    }
+  ]
+}
