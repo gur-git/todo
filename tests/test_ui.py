@@ -349,6 +349,31 @@ def test_edits_made_offline_queue_and_survive_a_reload(page):
     assert page.evaluate("() => window.__todo.sync.pending.length") >= 1
 
 
+def test_unconfigured_app_says_so_rather_than_looking_empty(page):
+    """An unconnected list and an empty list look identical otherwise."""
+    assert page.locator("#empty").is_visible()
+    assert "Not connected" in page.locator("#empty").inner_text()
+
+
+def test_settings_prefills_real_values_not_just_placeholders(page):
+    """Grey placeholder text reads as 'already filled in'; leaving these blank
+    silently produced a local-only list with no sync and no error."""
+    page.click("#settings-btn")
+    assert page.input_value("#s-owner") == "gur-git"
+    assert page.input_value("#s-repo") == "todo-data"
+    assert page.input_value("#s-path") == "tasks.json"
+
+
+def test_a_token_with_no_repo_is_called_out(page):
+    page.click("#settings-btn")
+    page.fill("#s-owner", "")
+    page.fill("#s-repo", "")
+    page.fill("#s-token", "some-token")
+    page.click("#s-save")
+    page.wait_for_selector("#banner:not([hidden])")
+    assert "Owner and Data repo are empty" in page.locator("#banner").inner_text()
+
+
 def test_an_expired_token_says_so_instead_of_failing_quietly(page):
     page.evaluate("""() => {
         localStorage.setItem('todo.owner', 'gur-git');

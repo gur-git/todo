@@ -71,9 +71,16 @@ function render() {
   const empty = $('empty');
   if (groups.length === 0) {
     empty.hidden = false;
-    empty.textContent = c.total === 0
-      ? 'Nothing here. Add something below.'
-      : `Nothing matches. ${hidden} task${hidden === 1 ? '' : 's'} hidden by the filters above.`;
+    const cfg = config();
+    const connected = cfg.owner && cfg.repo && cfg.token;
+    if (c.total === 0 && !connected) {
+      // Never let "not connected" look like "you have no tasks".
+      empty.textContent = 'Not connected to GitHub yet — tap ⚙ above and fill in all four fields, including the token.';
+    } else if (c.total === 0) {
+      empty.textContent = 'Nothing here. Add something below.';
+    } else {
+      empty.textContent = `Nothing matches. ${hidden} task${hidden === 1 ? '' : 's'} hidden by the filters above.`;
+    }
   } else {
     empty.hidden = true;
   }
@@ -260,9 +267,11 @@ $('detail').addEventListener('close', () => {
 
 $('settings-btn').addEventListener('click', () => {
   const c = config();
-  $('s-owner').value = c.owner;
-  $('s-repo').value = c.repo;
-  $('s-path').value = c.path;
+  // Real values, not placeholders. Greyed placeholder text reads as "already
+  // filled in", so leaving these blank silently produced a local-only list.
+  $('s-owner').value = c.owner || 'gur-git';
+  $('s-repo').value = c.repo || 'todo-data';
+  $('s-path').value = c.path || 'tasks.json';
   $('s-token').value = c.token;
   $('s-expires').value = (LS.getItem('todo.tokenExpires') || '').slice(0, 10);
   $('s-msg').textContent = c.token ? 'A token is saved on this device.' : 'No token yet — changes stay on this device.';
@@ -277,6 +286,14 @@ $('settings').addEventListener('close', async () => {
   LS.setItem('todo.token', $('s-token').value.trim());
   LS.setItem('todo.tokenExpires', $('s-expires').value || '');
   await restart();
+  // A token with no repo to point at is the most likely way to misconfigure
+  // this, and it fails silently otherwise.
+  const c2 = config();
+  if (c2.token && (!c2.owner || !c2.repo)) {
+    const banner = $('banner');
+    banner.hidden = false;
+    banner.textContent = 'A token is saved, but Owner and Data repo are empty — so nothing is being synced. Tap ⚙ and fill them in (gur-git / todo-data).';
+  }
 });
 
 async function restart() {
